@@ -8,6 +8,80 @@ import (
 	"testing"
 )
 
+func BenchmarkTable(b *testing.B) {
+	benchmarks := []struct {
+		name    string
+		request string
+	}{
+		{
+			name:    "Yohan",
+			request: "Yohan",
+		},
+		{
+			name:    "Nabila",
+			request: "Nabila",
+		},
+		{
+			name:    "Fathar",
+			request: "Fathar",
+		},
+		{
+			name:    "Taqy",
+			request: "Taqy",
+		},
+		{
+			name:    "Yohan Apriyandi",
+			request: "Yohan Apriyandi",
+		},
+		{
+			name:    "Fithriya Nabilah",
+			request: "Fithriya Nabilah",
+		},
+		{
+			name:    "Fathar Dhabit Adz-Dzaky",
+			request: "Fathar Dhabit Adz-Dzaky",
+		},
+		{
+			name:    "Fariq Taqy Abqary",
+			request: "Fariq Taqy Abqary",
+		},
+	}
+
+	for _, benchmark := range benchmarks {
+		b.Run(benchmark.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				HelloWord(benchmark.request)
+			}
+		})
+	}
+}
+
+func BenchmarkSubHelloWord(b *testing.B) {
+	b.Run("Yohan", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			HelloWord("Yohan")
+		}
+	})
+
+	b.Run("Nabilah", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			HelloWord("Nabilah")
+		}
+	})
+}
+
+func BenchmarkHelloWord(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		HelloWord("aa")
+	}
+}
+
+func BenchmarkHelloWordFathar(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		HelloWord("ade")
+	}
+}
+
 func TestTableHelloWord(t *testing.T) {
 	tests := []struct {
 		name     string
